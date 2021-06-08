@@ -1,9 +1,26 @@
-R_1 = 0.4573
+%ANÁLISE DE MECANISMOS QUATRO BARRAS
+%VERSÃO: ANÁLISE DEPENDENTE DO TEMPO
+%Matlab v1.0
+ 
+%TRABALHO DE CONCLUSÃO DE CURSO DE ENGENHARIA MECÂNICA
+%UNOCHAPECÓ - UNIVERSIDADE COMUNITÁRIA DA REGIÃO DE CHAPECÓ
+%TÍTULO: DESENVOLVIMENTO DE PROGRAMA PARA SIMULAÇÃO E ANÁLISE DE MECANISMOS QUATRO BARRAS
+%TCC 1
+ 
+%ACADÊMICO: Nícolas Alexandre Gregol Ramthum
+%ORIENTADOR: Prof. André Luiz Grando Santos, Dr. Eng.
+
+clear all; % Limpar memoria
+clc;
+disp('Comeco do programa')
+
+R_1 = 0.4573 %Barra "Terra"
 R_2 = 0.15242
 R_3 = 0.40444
 R_4 = 0.30479
 R_5 = 0.40444/2
-Teta_2 = 0:1:360
+k = 1; %Incremento do tempo
+Teta_2 = 0:k:360
 Alpha = 0
 Rot = 120
 Omega_2 =  Rot*0.104719755120
@@ -42,21 +59,7 @@ Tempo1V = 2*pi()/Omega_2
 NumDiv = Tempo1V/DeltaT
 Tempo = 0:DeltaT:Tempo1V
 
-V_Px(1) = (P_x(1)-P_x(length(Teta_2)-1))/DeltaT
-V_Py(1) = (P_y(1)-P_y(length(Teta_2)-1))/DeltaT
-V_P(1) = (V_Px(1).^2 + V_Py(1).^2).^0.5
-
-V_Ax(1) = (A_x(1)-A_x(length(Teta_2)-1))/DeltaT
-V_Ay(1) = (A_y(1)-A_y(length(Teta_2)-1))/DeltaT
-V_A(1) = (V_Ax(1).^2 + V_Ay(1).^2).^0.5
-
-V_Bx(1) = (B_x(1)-B_x(length(Teta_2)-1))/DeltaT
-V_By(1) = (B_y(1)-B_y(length(Teta_2)-1))/DeltaT
-V_B(1) = (V_Bx(1).^2 + V_By(1).^2).^0.5
-
-
-
-for i=2:1:length(Teta_2)
+for i=2:1:(length(Teta_2))
    V_Px(i) = (P_x(i)-P_x(i-1))/DeltaT
    V_Py(i) = (P_y(i)-P_y(i-1))/DeltaT
    V_P(i) = (V_Px(i).^2 + V_Py(i).^2).^0.5
@@ -71,20 +74,20 @@ for i=2:1:length(Teta_2)
       
 end
 
-A_Px(1) = (V_Px(1)-V_Px(length(Teta_2)-1))/DeltaT
-A_Py(1) = (V_Py(1)-V_Py(length(Teta_2)-1))/DeltaT
-A_P(1) = (A_Px(1).^2 + A_Py(1).^2).^0.5
+V_Px(1) = (P_x(1)-P_x(length(Teta_2)-1))/DeltaT
+V_Py(1) = (P_y(1)-P_y(length(Teta_2)-1))/DeltaT
+V_P(1) = (V_Px(1).^2 + V_Py(1).^2).^0.5
 
-A_Ax(1) = (V_Ax(1)-V_Ax(length(Teta_2)-1))/DeltaT
-A_Ay(1) = (V_Ay(1)-V_Ay(length(Teta_2)-1))/DeltaT
-A_A(1) = (A_Ax(1).^2 + A_Ay(1).^2).^0.5
+V_Ax(1) = (A_x(1)-A_x(length(Teta_2)-1))/DeltaT
+V_Ay(1) = (A_y(1)-A_y(length(Teta_2)-1))/DeltaT
+V_A(1) = (V_Ax(1).^2 + V_Ay(1).^2).^0.5
 
-A_Bx(1) = (V_Bx(1)-V_Bx(length(Teta_2)-1))/DeltaT
-A_By(1) = (V_By(1)-V_By(length(Teta_2)-1))/DeltaT
-A_B(1) = (A_Bx(1).^2 + A_By(1).^2).^0.5
+V_Bx(1) = (B_x(1)-B_x(length(Teta_2)-1))/DeltaT
+V_By(1) = (B_y(1)-B_y(length(Teta_2)-1))/DeltaT
+V_B(1) = (V_Bx(1).^2 + V_By(1).^2).^0.5
+
 
 for i=2:1:length(Teta_2)
-
  A_Px(i) = (V_Px(i)-V_Px(i-1))/DeltaT
  A_Py(i) = (V_Py(i)-V_Py(i-1))/DeltaT
  A_P(i) = (A_Px(i).^2 + A_Py(i).^2).^0.5
@@ -96,20 +99,7 @@ for i=2:1:length(Teta_2)
  A_Bx(i) = (V_Bx(i)-V_Bx(i-1))/DeltaT
  A_By(i) = (V_By(i)-V_By(i-1))/DeltaT
  A_B(i) = (A_Bx(i).^2 + A_By(i).^2).^0.5
- 
 end
-
-% figure(1)
-% plot(Tempo,A_P,Tempo, A_B,Tempo, A_A)
-% 
-% figure(2)
-% plot(Tempo,V_P,Tempo, V_B,Tempo, V_A)
-% 
-% figure(3)
-% plot(P_x,P_y,A_x,A_y,B_x,B_y)
-% 
-% figure(4)
-% plot(Teta_2,A_B)
 
 figure(1)
 
